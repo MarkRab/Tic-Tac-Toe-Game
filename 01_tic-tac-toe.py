@@ -57,5 +57,17 @@ def next_pos():
     return real_next_position
 
 def update_gamelist():
-    if ini_start == 'X':
+    # DEFINE 2 LISTS FOR INPUT X O
+    list1=['X','O','X','O','X','O','X','O','X']
+    list2=['O','X','O','X','O','X','O','X','O']
+    finallist=[]
+
+    if ini_start()=='X':
+        finallist= list1
+
+    elif ini_start()=='O':
+        finallist= list2
+
         
+    # keep on while not True
+        while 
