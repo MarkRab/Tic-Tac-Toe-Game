@@ -75,9 +75,7 @@ def judge_win(gamelist):
     a8 = gamelist[9][5]
     a9 = gamelist[9][9]
 
-    judgesame = a1==a2==a3 or a4==a5==a6 or a7==a8==a9 or a1==a4==a7 or a2==a5==a8 or a3==a6==a9 or a1==a5==a9 or a3==a5==a7
-    judgenozero = a1!=' ' and a4!=' ' and a7!=' ' and a2!=' ' and a3!=' '
-    judge = judgesame and judgenozero
+    judge = a1==a2==a3!=' ' or a4==a5==a6!=' ' or a7==a8==a9!=' ' or a1==a4==a7!=' ' or a2==a5==a8!=' ' or a3==a6==a9!=' ' or a1==a5==a9!=' ' or a3==a5==a7!=' '
     return judge
 
 def update_list(inistart):
@@ -104,18 +102,6 @@ def update_list(inistart):
             ' {} | {} | {} '.format(one,four,seven),
            '   |   |   ']
 
-    reset_gamelist = ['   |   |   ',
-            ' { } | { } | { } ',
-            '   |   |   ',
-            '-----------',
-            '   |   |   ',
-            ' { } | { } | { } ',
-            '   |   |   ',
-            '-----------',
-            '   |   |   ',
-            ' { } | { } | { } ',
-           '   |   |   ']
-    
     compare_list={'1':one,'2':two,'3':three,'4':four,'5':five,'6':six,'7':seven,'8':eight,'9':nine
     }
 
@@ -132,15 +118,47 @@ def update_list(inistart):
 
     # keep on while not win
     i=0
+    lastpos=''
     result='Wrong'
 
     while result != True:
         nextpos = next_pos()
-        compare_list[nextpos]=finallist[i]
+        if nextpos == lastpos:
+            print('You need to choose different position')
+            continue
+        if nextpos == '1':
+            one = finallist[i]
+            gamelist[9] = ' {} | {} | {} '.format(one, four, seven)
+        elif nextpos == '2':
+            two = finallist[i]
+            gamelist[5] = ' {} | {} | {} '.format(two, five, eight)
+        elif nextpos == '3':
+            three = finallist[i]
+            gamelist[1] = ' {} | {} | {} '.format(three, six, nine)
+        elif nextpos == '4':
+            four = finallist[i]
+            gamelist[9] = ' {} | {} | {} '.format(one, four, seven)
+        elif nextpos == '5':
+            five = finallist[i]
+            gamelist[5] = ' {} | {} | {} '.format(two, five, eight)
+        elif nextpos == '6':
+            six = finallist[i]
+            gamelist[1] = ' {} | {} | {} '.format(three, six, nine)
+        elif nextpos == '7':
+            seven = finallist[i]
+            gamelist[9] = ' {} | {} | {} '.format(one, four, seven)
+        elif nextpos == '8':
+            eight = finallist[i]
+            gamelist[5] = ' {} | {} | {} '.format(two, five, eight)
+        elif nextpos == '9':
+            nine = finallist[i]
+            gamelist[1] = ' {} | {} | {} '.format(three, six, nine)
+
         for each in gamelist:
             print(each)
         result = judge_win(gamelist)
         i+=1
+        lastpos = nextpos
 
     if result == True:
         print('Congratulations! You won.')
