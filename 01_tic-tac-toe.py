@@ -41,6 +41,18 @@ gamelist = {'line1':'   |   |   ',
            'line10':'   |   |   ',
            'line11':'   |   |   '}
 
+reset_gamelist = {'line1':'   |   |   ',
+            'line2':'   |   |   ',
+            'line3':'   |   |   ',
+            'line4':'-----------',
+            'line5':'   |   |   ',
+            'line6':'   |   |   ',
+            'line7':'   |   |   ',
+            'line8':'-----------',
+            'line9':'   |   |   ',
+           'line10':'   |   |   ',
+           'line11':'   |   |   '}
+
 # tic game start
 def next_pos():
     
@@ -70,7 +82,8 @@ def judge_win(gamelist):
     return a1==a2==a3 or a4==a5==a6 or a7==a8==a9 or a1==a4==a7 or a2==a5==a8 or a3==a6==a9 or a1==a5==a9 or a3==a5==a7
 
 
-def update_gamelist():
+def update_list():
+
     # DEFINE 2 LISTS FOR INPUT X O
     list1=['X','O','X','O','X','O','X','O','X']
     list2=['O','X','O','X','O','X','O','X','O']
@@ -96,9 +109,29 @@ def update_gamelist():
 
     # keep on while not win
     i=0
-    while judge_win(gamelist) == False:
-        index_position[next_pos]=finallist[i]
+    result='Wrong'
+
+    while result == False:
         next_pos()
+        index_position[next_pos]=finallist[i]
         print(gamelist)
-        judge_win(gamelist)
+        result = judge_win(gamelist)
         i+=1
+
+    if result == True:
+        print('Correct')
+
+        playagain='Wrong'
+        while playagain not in ['Yes','No']:
+            playagain = input('Do you want to play again? Yes or No')
+
+        if playagain == 'Yes':
+            gamelist = reset_gamelist
+            main()
+        elif playagain == 'No':
+            print('GG. Have a good day')
+
+def main():
+    ini_start()
+    ready_play()
+    update_list()
