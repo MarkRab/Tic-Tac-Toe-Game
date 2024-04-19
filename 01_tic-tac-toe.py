@@ -56,6 +56,20 @@ def next_pos():
     real_next_position = int(next_position)
     return real_next_position
 
+def judge_win(gamelist):
+    a1 = gamelist['line10'][1]
+    a2 = gamelist['line6'][1]
+    a3 = gamelist['line1'][1]
+    a4 = gamelist['line10'][5]
+    a5 = gamelist['line6'][5]
+    a6 = gamelist['line1'][5]
+    a7 = gamelist['line10'][9]
+    a8 = gamelist['line6'][9]
+    a9 = gamelist['line1'][9]
+
+    return a1==a2==a3 or a4==a5==a6 or a7==a8==a9 or a1==a4==a7 or a2==a5==a8 or a3==a6==a9 or a1==a5==a9 or a3==a5==a7
+
+
 def update_gamelist():
     # DEFINE 2 LISTS FOR INPUT X O
     list1=['X','O','X','O','X','O','X','O','X']
@@ -68,6 +82,23 @@ def update_gamelist():
     elif ini_start()=='O':
         finallist= list2
 
-        
-    # keep on while not True
-        while 
+    index_position={
+    '1':gamelist['line10'][1],
+    '2':gamelist['line6'][1],
+    '3':gamelist['line1'][1],
+    '4':gamelist['line10'][5],
+    '5':gamelist['line6'][5],
+    '6':gamelist['line1'][5],
+    '7':gamelist['line10'][9],
+    '8':gamelist['line6'][9],
+    '9':gamelist['line1'][9],
+    }
+
+    # keep on while not win
+    i=0
+    while judge_win(gamelist) == False:
+        index_position[next_pos]=finallist[i]
+        next_pos()
+        print(gamelist)
+        judge_win(gamelist)
+        i+=1
