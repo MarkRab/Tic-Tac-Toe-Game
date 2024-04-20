@@ -71,12 +71,11 @@ def judge_win(gamelist):
     a4 = gamelist[9][5]
     a5 = gamelist[5][5]
     a6 = gamelist[1][5]
-    a7 = gamelist[9][1]
-    a8 = gamelist[9][5]
-    a9 = gamelist[9][9]
+    a7 = gamelist[9][9]
+    a8 = gamelist[5][9]
+    a9 = gamelist[1][9]
 
-    judge = a1==a2==a3!=' ' or a4==a5==a6!=' ' or a7==a8==a9!=' ' or a1==a4==a7!=' ' or a2==a5==a8!=' ' or a3==a6==a9!=' ' or a1==a5==a9!=' ' or a3==a5==a7!=' '
-    return judge
+    return a1==a2==a3!=' ' or a4==a5==a6!=' ' or a7==a8==a9!=' ' or a1==a4==a7!=' ' or a2==a5==a8!=' ' or a3==a6==a9!=' ' or a1==a5==a9!=' ' or a3==a5==a7!=' '
 
 def update_list(inistart):
 
@@ -91,19 +90,16 @@ def update_list(inistart):
     nine=' '
 
     gamelist = ['   |   |   ',
-            ' {} | {} | {} '.format(three,six,nine),
-            '   |   |   ',
-            '-----------',
-            '   |   |   ',
-            ' {} | {} | {} '.format(two,five,eight),
-            '   |   |   ',
-            '-----------',
-            '   |   |   ',
-            ' {} | {} | {} '.format(one,four,seven),
-           '   |   |   ']
-
-    compare_list={'1':one,'2':two,'3':three,'4':four,'5':five,'6':six,'7':seven,'8':eight,'9':nine
-    }
+        ' {} | {} | {} '.format(three,six,nine),
+        '   |   |   ',
+        '-----------',
+        '   |   |   ',
+        ' {} | {} | {} '.format(two,five,eight),
+        '   |   |   ',
+        '-----------',
+        '   |   |   ',
+        ' {} | {} | {} '.format(one,four,seven),
+        '   |   |   ']
 
     # DEFINE 2 LISTS FOR INPUT X O
     list1=['X','O','X','O','X','O','X','O','X']
@@ -119,9 +115,9 @@ def update_list(inistart):
     # keep on while not win
     i=0
     lastpos=''
-    result='Wrong'
+    result=False
 
-    while result != True:
+    while result == False:
         nextpos = next_pos()
         if nextpos == lastpos:
             print('You need to choose different position')
@@ -168,15 +164,6 @@ def update_list(inistart):
             playagain = input('Do you want to play again? Yes or No')
 
         if playagain == 'Yes':
-            one=' '
-            two=' '
-            three=' '
-            four=' '
-            five=' '
-            six=' '
-            seven=' '
-            eight=' '
-            nine=' '
 
             main()
         elif playagain == 'No':
@@ -196,3 +183,5 @@ def main():
  #   next_pos()
         
     update_list(inistart)
+
+main()
