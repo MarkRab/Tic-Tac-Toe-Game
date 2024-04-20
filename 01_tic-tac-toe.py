@@ -32,7 +32,7 @@ def ini_start():
         
     return initial_start
 
-# ready to play?
+# READY TO PLAY? YES OR NO
 def ready_play():
     ready_to_play = 'wrong'
 
@@ -46,9 +46,7 @@ def ready_play():
         else:
             return False
 
-
-
-# tic game start
+# CHOOSE NEXT POSITION
 def next_pos():
     
     next_position = 'wrong'
@@ -64,6 +62,7 @@ def next_pos():
 
     return next_position
 
+# JUDGE WHETHER WIN OR NOT. STRAIGHT AND DIAGONAL LINES
 def judge_win(gamelist):
     a1 = gamelist[9][1]
     a2 = gamelist[5][1]
@@ -77,6 +76,7 @@ def judge_win(gamelist):
 
     return a1==a2==a3!=' ' or a4==a5==a6!=' ' or a7==a8==a9!=' ' or a1==a4==a7!=' ' or a2==a5==a8!=' ' or a3==a6==a9!=' ' or a1==a5==a9!=' ' or a3==a5==a7!=' '
 
+# UPDATE GAMELIST AND REFER JUDGE FUNCTION TO JUDGE
 def update_list(inistart):
 
     one=' '
@@ -169,6 +169,7 @@ def update_list(inistart):
         elif playagain == 'No':
             print('GG. Have a good day')
 
+# MAIN TO CONNECT ALL FUNCTION TOGETHER
 def main():
 
     intro()
@@ -180,8 +181,6 @@ def main():
     if ready == False:
         return
 
- #   next_pos()
-        
     update_list(inistart)
 
 main()
