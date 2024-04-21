@@ -34,7 +34,7 @@ def ini_start():
     elif initial_start in ['O','o']:
         print('Player 2 will have X')
         
-    return initial_start
+    return initial_start.upper()
 
 # READY TO PLAY? YES OR NO
 def ready_play():
@@ -106,15 +106,31 @@ def update_list(inistart):
         '   |   |   ']
 
     # DEFINE 2 LISTS FOR INPUT X O
-    list1=['X','O','X','O','X','O','X','O','X']
-    list2=['O','X','O','X','O','X','O','X','O']
+    # list1=['X','O','X','O','X','O','X','O','X']
+    # list2=['O','X','O','X','O','X','O','X','O']
+    # 
+
+    # if inistart=='X' or 'x':
+    #     finallist= list1
+
+    # elif inistart=='O' or 'o':
+    #     finallist= list2
+    
     finallist=[]
+    i=0
 
-    if inistart=='X' or 'x':
-        finallist= list1
-
-    elif inistart=='O' or 'o':
-        finallist= list2
+    for each in range(0,9):
+        if inistart=='X':
+            if i%2==0:
+                finallist.append('X')
+            else:
+                finallist.append('O')
+        elif inistart=='O':
+            if i%2==0:
+                finallist.append('O')
+            else:
+                finallist.append('X')
+        i+=1            
 
     # keep on while not win
     i=0
