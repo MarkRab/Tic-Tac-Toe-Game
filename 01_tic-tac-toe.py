@@ -19,16 +19,20 @@ def intro():
         print(value)
     print('Please remember the locations of values')
 
-
 # CHOOSE X OR O
 def ini_start():
     initial_start = 'wrong'
 
-    while initial_start not in ['X','O']:
+    while initial_start not in ['X','x','O','o']:
         initial_start = input('Player 1: Do you want to be X or O? ')
 
-        if initial_start not in ['X','O']:
+        if initial_start not in ['X','x','O','o']:
             print('Sorry, please input X or O')
+    
+    if initial_start in ['X','x']:
+        print('Player 2 will have O')
+    elif initial_start in ['O','o']:
+        print('Player 2 will have X')
         
     return initial_start
 
@@ -36,12 +40,12 @@ def ini_start():
 def ready_play():
     ready_to_play = 'wrong'
 
-    while ready_to_play not in ['Yes','No']:
+    while ready_to_play.lower() not in ['yes','no']:
         ready_to_play = input('Are you ready to play? Enter Yes or No. ')
 
-        if ready_to_play not in ['Yes','No']:
+        if ready_to_play.lower() not in ['yes','no']:
             print('Sorry, you need to input Yes or No')
-        elif ready_to_play == 'Yes':
+        elif ready_to_play.lower() == 'yes':
             return True
         else:
             return False
@@ -50,15 +54,15 @@ def ready_play():
 def next_pos():
     
     next_position = 'wrong'
-    next_position = input('Choose your next position: (1-9)')
+    next_position = input('Choose your position: (1-9)')
     
     while next_position.isdigit() != True: 
         print('Please input a number')
-        next_position = input('Choose your next position: (1-9)')
+        next_position = input('Choose your position: (1-9)')
 
     while next_position not in ['1','2','3','4','5','6','7','8','9']:
         print('Please input a number in the range(1-9)')
-        next_position = input('Choose your next position: (1-9)')
+        next_position = input('Choose your position: (1-9)')
 
     return next_position
 
@@ -106,10 +110,10 @@ def update_list(inistart):
     list2=['O','X','O','X','O','X','O','X','O']
     finallist=[]
 
-    if inistart=='X':
+    if inistart=='X' or 'x':
         finallist= list1
 
-    elif inistart=='O':
+    elif inistart=='O' or 'o':
         finallist= list2
 
     # keep on while not win
@@ -118,6 +122,11 @@ def update_list(inistart):
     result=False
 
     while result == False:
+        if i%2 ==0:
+            print("-------------------------\n \nPlayer 1's turn")
+        else:
+            print("-------------------------\n \nPlayer 2's turn")
+
         nextpos = next_pos()
         if nextpos == lastpos:
             print('You need to choose different position')
@@ -155,19 +164,27 @@ def update_list(inistart):
         result = judge_win(gamelist)
         i+=1
         lastpos = nextpos
+        if one!=' ' and two!=' ' and three!=' '  and four!=' ' and five!=' ' and six!=' ' and seven!=' ' and eight!=' ' and nine!=' ' and result!=True:
+            print('All blanks taken, tie! GG, have a good day.')
+            play_again()
 
     if result == True:
-        print('Congratulations! You won.')
+        if i%2==0:
+            print('Congratulations! Player 2 won!!')
+        else:
+            print('Congratulations! Player 1 won!!')
+        play_again()
 
-        playagain='Wrong'
-        while playagain not in ['Yes','No']:
-            playagain = input('Do you want to play again? Yes or No')
+def play_again():
+    playagain='Wrong'
+    while playagain not in ['Yes','No']:
+        playagain = input('Do you want to play again? Yes or No: ')
 
-        if playagain == 'Yes':
+    if playagain == 'Yes':
 
-            main()
-        elif playagain == 'No':
-            print('GG. Have a good day')
+        main()
+    elif playagain == 'No':
+        print('GG. Have a good day')
 
 # MAIN TO CONNECT ALL FUNCTION TOGETHER
 def main():
